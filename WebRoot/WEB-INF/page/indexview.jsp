@@ -118,6 +118,7 @@
 			    		for(ResourceNode secNode : topNode.children){
 			    			String secResName = secNode.resource.getName();
 			    			String url = secNode.resource.getUrl();
+			    			System.out.println(secNode.resource.getDispalyStatus());
 			    	 %>
 				    	<ul class="dashboard-menu nav nav-list collapse in">
 				            <li><a href="${serverRoot}/<%= url %>"><span class="fa fa-caret-right"></span><%= secResName %></a></li>

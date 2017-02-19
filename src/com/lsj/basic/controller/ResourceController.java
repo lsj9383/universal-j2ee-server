@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -34,6 +35,11 @@ public class ResourceController {
 		return json;
 	}
 	
+	@GetMapping("addview.do")
+	public String addView(){
+		return "resource/addview";
+	}
+	
 	@GetMapping("listview.do")
 	public String listResource(Model model){
 		List<Resource> list = resourceService.listAll();
@@ -42,4 +48,17 @@ public class ResourceController {
 		model.addAttribute("resourceList", list);
 		return "resource/listview";
 	}
+	
+	
+	@ResponseBody
+	@PostMapping("add.do")
+	public JsonForReturn add(Resource resource){
+		JsonForReturn json = new JsonForReturn();
+		json.data = resourceService.add(resource);
+		if(json.data == null){
+			json.flag = false;
+			json.msg = "error";
+		}
+		return json;
+	} 
 }

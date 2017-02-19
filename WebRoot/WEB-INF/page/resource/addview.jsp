@@ -6,7 +6,9 @@
 <%@ page import="java.util.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head>
+<html>
+
+<head>
     <meta charset="utf-8">
     <title>Bootstrap Admin</title>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
@@ -19,18 +21,11 @@
     <link rel="stylesheet" href="${serverRoot}/static/lib/font-awesome/css/font-awesome.css">
 
     <script src="${serverRoot}/static/lib/jquery-1.11.1.min.js" type="text/javascript"></script>
-	<script src="${serverRoot}/static/lib/jQuery-Knob/js/jquery.knob.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function() {
-            $(".knob").knob();
-        });
-    </script>
-
-
     <link rel="stylesheet" type="text/css" href="${serverRoot}/static/stylesheets/theme.css">
     <link rel="stylesheet" type="text/css" href="${serverRoot}/static/stylesheets/premium.css">
 
 </head>
+
 <body class=" theme-blue">
 
     <!-- Demo page code -->
@@ -69,6 +64,27 @@
             $('#main-menu').append(uls.clone());
         });
     </script>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  
+
+  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+   
+  <!--<![endif]-->
 
     <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -116,69 +132,52 @@
 
     <div class="content">
         <div class="header">
-            <h1 class="page-title">Dashboard</h1>
-            <ul class="breadcrumb">
-            	<li><a href="">Home</a> </li>
-            	<li class="active">Dashboard</li>
-        	</ul>
+            <h1 class="page-title">Edit User</h1>
         </div>
-        
-<!-- ************************************************************************************** -->      
-        <div class="main-content">
-	        <div class="btn-toolbar list-toolbar">
-			    <button onclick="location.href='/jser/resource/addview.do'" class="btn btn-primary"><i class="fa fa-plus"></i>增加资源</button>
-			</div>
-			<table class="table">
-				  <thead>
-				    <tr>
-				      <th>#</th>
-				      <th>父亲id</th>
-				      <th>资源名</th>
-				      <th>url</th>
-				      <th>权限位</th>
-				      <th>是否显示</th>
-				      <th>是否启用</th>
-				      <th>描述</th>
-				      <th>修改/删除</th>
-				      <th style="width: 3.5em;"></th>
-				    </tr>
-				  </thead>
-				  <tbody>
-				  	<%
-				  		List<Resource> resources = (List<Resource>) request.getAttribute("resourceList");
-				  		for(int index = 0; index<resources.size(); index++){
-				  			Resource resource = resources.get(index);
-				  	%>
-				    <tr>
-				      <td><%= resource.getSid() %></td>
-				      <td><%= resource.getParentId() %></td>
-				      <td><%= resource.getName() %></td>
-				      <td><%= resource.getUrl() %></td>
-				      <td><%= resource.getCksPower() %></td>
-				      <td><%= resource.getDispalyStatus() %></td>
-				      <td><%= resource.getEnableStatus() %></td>
-				      <td><%= resource.getRemarks() %></td>
-				      <td>
-				          <a href="user.html"><i class="fa fa-pencil"></i></a>
-				          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
-				      </td>
-				    </tr>
-				    <%
-				  		}
-				    %>
-				  </tbody>
-				</table>
+		<div class="main-content">
+      		<div class="row">
+				<div class="col-md-4">
+			      <div class="tab-pane active in" id="home">
+				      <form action="/jser/resource/add.do" method="post">
+					        <div class="form-group">
+					        	<label>资源名</label>
+					        	<input type="text" name="name" class="form-control">
+					        </div>
+					        
+					        <div class="form-group">
+					        	<label>Url</label>
+					        	<input type="text" name="url" class="form-control">
+					        </div>
+					        
+					        <div class="form-group">
+					        	<label>父类ID</label>
+					        	<input type="text" name="parentId" class="form-control">
+					        </div>
+					        
+					        <div class="form-group">
+					        	<label>是否显示</label>
+					        	<input type="text" name="dispalyStatus" class="form-control">
+					        </div>
+					        
+					        <div class="form-group">
+					        	<label>是否启用</label>
+					        	<input type="text" name="enableStatus" class="form-control">
+					        </div>
+					        
+					        <div class="form-group">
+					        	<label>描述</label>
+					        	<input type="text" name="remarks" class="form-control">
+					        </div>
+					        
+					        <div class="btn-toolbar list-toolbar">
+						      <input type="submit" class="btn btn-primary">
+						    </div>
+				      </form>
+					</div>
+				</div>
+        	</div>
+            <footer></footer>
 		</div>
-<!-- ************************************************************************************** -->
-
-            <footer>
-                <hr>
-
-                <!-- Purchase a site license to remove this link from the footer: http://www.portnine.com/bootstrap-themes -->
-                <p class="pull-right">A <a href="http://www.portnine.com/bootstrap-themes" target="_blank">Free Bootstrap Theme</a> by <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-                <p>© 2014 <a href="http://www.portnine.com" target="_blank">Portnine</a></p>
-            </footer>
-        </div>
     </div>
 
 
@@ -191,4 +190,5 @@
     </script>
     
   
-</body></html>
+</body>
+</html>

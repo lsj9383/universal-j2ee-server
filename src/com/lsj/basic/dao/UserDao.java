@@ -1,7 +1,11 @@
 package com.lsj.basic.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -19,6 +23,8 @@ public class UserDao {
 	@Autowired
 	NamedParameterJdbcTemplate njt;
 	
+	private RowMapper<User> userMapper = new BeanPropertyRowMapper<User>(User.class);
+	
 	public User restAdmin(User admin){
 		//清除原来的admin
 		String delSql = "delete from users where username=?";
@@ -33,6 +39,10 @@ public class UserDao {
 			admin.setSid(keyHolder.getKey().intValue());
 		}
 		return admin;
+	}
+	
+	public List<User> list(){
+		return jt.query("select * from users", userMapper);
 	}
 
 }

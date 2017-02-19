@@ -1,5 +1,7 @@
 package com.lsj.basic.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class UserServiceImpl implements UserService {
 		}
 		admin.setPower(power);
 		return dao.restAdmin(admin);
+	}
+
+	@Override
+	public List<User> list() {
+		return dao.list();
 	}
 
 }
