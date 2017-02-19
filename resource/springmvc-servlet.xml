@@ -15,7 +15,7 @@
 	
 	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name = "viewClass" value = "org.springframework.web.servlet.view.JstlView"></property>
-		<property name = "prefix" value = "/WEB-INF/jsp/"></property>
+		<property name = "prefix" value = "/WEB-INF/page/"></property>
 		<property name = "suffix" value = ".jsp"></property>
 	</bean>
 	
