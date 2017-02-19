@@ -1,5 +1,7 @@
 package com.lsj.basic.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +55,11 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		dao.delFoundResorces();
 		return dao.addResources(ress);
+	}
+
+	@Override
+	public List<Resource> listAll() {
+		return dao.listAll();
 	}
 
 }

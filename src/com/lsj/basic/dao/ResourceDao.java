@@ -1,5 +1,9 @@
 package com.lsj.basic.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -35,5 +39,23 @@ public class ResourceDao {
 			}
 		}
 		return ress;
+	}
+	
+	public List<Resource> listAll(){
+		List<Map<String, Object>> listMap = jt.queryForList("select * from resources");
+		List<Resource> list = new ArrayList<Resource>();
+		for(Map<String, Object> itemMap : listMap){
+			Resource resource = new Resource();
+			resource.setSid((Integer)itemMap.get("sid"));
+			resource.setParentId((Integer)itemMap.get("parent_id"));
+			resource.setUrl((String)itemMap.get("url"));
+			resource.setName((String)itemMap.get("name"));
+			resource.setCksPower((Integer) itemMap.get("cks_power"));
+			resource.setDispalyStatus((String)itemMap.get("display_status"));
+			resource.setEnableStatus((String)itemMap.get("enable_status"));
+			resource.setRemarks((String)itemMap.get("remarks"));
+			list.add(resource);
+		}
+		return list;
 	}
 }

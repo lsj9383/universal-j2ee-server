@@ -62,8 +62,10 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 	}
 	
 	private void turenToErrorPage(HttpServletResponse response, Type type) throws IOException{
-		String url = "sys/turn.do?sec=3&";
-		String target="target=";
+		String url = "/jser/sys/turn.do?sec=3";
+		String target="&target=";
+		String msg="&msg=";
+		String redUrl=null;
 		switch(type){
 		case ERROR:
 			System.out.println("未知错误");
@@ -71,11 +73,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 			break;
 		case NOLOGGED:
 			System.out.println("未登录");
-			response.sendRedirect(url+target+"loginview.do");
+			redUrl = url+target+"/jser/loginview.do"+msg+"not logged";
+			response.sendRedirect(redUrl);
 			break;
 		case NOPOWER:
 			System.out.println("无权限");
-			response.sendRedirect(url+target+"indexview.do");
+			redUrl = url+target+"/jser/indexview.do"+msg+"no power";
+			response.sendRedirect(redUrl);
 			break;
 		default :
 			break;

@@ -120,7 +120,7 @@
 			    			String url = secNode.resource.getUrl();
 			    	 %>
 				    	<ul class="dashboard-menu nav nav-list collapse in">
-				            <li><a href="<%= url %>"><span class="fa fa-caret-right"></span><%= secResName %></a></li>
+				            <li><a href="${serverRoot}/<%= url %>"><span class="fa fa-caret-right"></span><%= secResName %></a></li>
 				    	</ul>
 			    	<%
 			    		}

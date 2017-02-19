@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+<%@ page import="java.io.*" %>
+<%@ page import="com.lsj.common.model.Resource" %>
+<%@ page import="java.util.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
@@ -125,29 +128,44 @@
 	        <div class="btn-toolbar list-toolbar">
 			    <button class="btn btn-primary"><i class="fa fa-plus"></i>增加资源</button>
 			</div>
-			
 			<table class="table">
 				  <thead>
 				    <tr>
 				      <th>#</th>
+				      <th>父亲id</th>
 				      <th>资源名</th>
 				      <th>url</th>
+				      <th>权限位</th>
 				      <th>是否显示</th>
+				      <th>是否启用</th>
 				      <th>描述</th>
+				      <th>修改/删除</th>
 				      <th style="width: 3.5em;"></th>
 				    </tr>
 				  </thead>
 				  <tbody>
+				  	<%
+				  		List<Resource> resources = (List<Resource>) request.getAttribute("resourceList");
+				  		for(int index = 0; index<resources.size(); index++){
+				  			Resource resource = resources.get(index);
+				  	%>
 				    <tr>
-				      <td>1</td>
-				      <td>Mark</td>
-				      <td>Tompson</td>
-				      <td>the_mark7</td>
+				      <td><%= resource.getSid() %></td>
+				      <td><%= resource.getParentId() %></td>
+				      <td><%= resource.getName() %></td>
+				      <td><%= resource.getUrl() %></td>
+				      <td><%= resource.getCksPower() %></td>
+				      <td><%= resource.getDispalyStatus() %></td>
+				      <td><%= resource.getEnableStatus() %></td>
+				      <td><%= resource.getRemarks() %></td>
 				      <td>
 				          <a href="user.html"><i class="fa fa-pencil"></i></a>
 				          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
 				      </td>
 				    </tr>
+				    <%
+				  		}
+				    %>
 				  </tbody>
 				</table>
 		</div>
