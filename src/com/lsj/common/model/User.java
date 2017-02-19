@@ -1,11 +1,21 @@
 package com.lsj.common.model;
 
+import java.util.Date;
+
 public class User {
 	
 	private Integer sid;
 	private String username;
 	private String password;
 	private String power;
+	private String createDate;
+	
+	public String getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
 	public Integer getSid() {
 		return sid;
 	}
