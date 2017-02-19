@@ -20,13 +20,13 @@ public class ResourceDao {
 	NamedParameterJdbcTemplate njt;
 	
 	public int delFoundResorces(){
-		String delSql = "delete from resources where name=? or name=?";
-		return jt.update(delSql, "listResource", "addResource");
+		String delSql = "delete from resources where sid=? or sid=? or sid=? or sid=?";
+		return jt.update(delSql, "1", "2", "3", "4");
 	}
 	
 	public Resource[] addResources(Resource[] ress){
 		for(Resource res : ress){
-			String sql = "insert into resources (name, url, cks_power, display_status, enable_status, remarks) values (:name, :url, :cksPower, :dispalyStatus, :enableStatus, :remarks)";
+			String sql = "insert into resources (sid, parent_id, name, url, cks_power, display_status, enable_status, remarks) values (:sid, :parentId, :name, :url, :cksPower, :dispalyStatus, :enableStatus, :remarks)";
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			SqlParameterSource params = new BeanPropertySqlParameterSource(res);
 			njt.update(sql, params, keyHolder);

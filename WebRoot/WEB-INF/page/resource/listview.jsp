@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
-<%@ page import="com.lsj.login.model.ResourceNode" %>
-<%@ page import="com.lsj.common.model.Resource" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
@@ -106,30 +104,11 @@
     
 
     <div class="sidebar-nav">
-	    <ul>
-	    	<%
-	    		ResourceNode rootResource = (ResourceNode)request.getAttribute("resource");
-	    		for(ResourceNode topNode : rootResource.children){
-	    			String resourceName = topNode.resource.getName();
-	    	 %>
-		    	<li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i><%= resourceName %><i class="fa fa-collapse"></i></a></li>
-			    <li>
-			    	<%
-			    		for(ResourceNode secNode : topNode.children){
-			    			String secResName = secNode.resource.getName();
-			    			String url = secNode.resource.getUrl();
-			    	 %>
-				    	<ul class="dashboard-menu nav nav-list collapse in">
-				            <li><a href="<%= url %>"><span class="fa fa-caret-right"></span><%= secResName %></a></li>
-				    	</ul>
-			    	<%
-			    		}
-			    	 %>
-				</li>
-			<%
-				}
-			 %>
-		</ul>
+    <ul>
+    <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i> Dashboard<i class="fa fa-collapse"></i></a></li>
+    <li><ul class="dashboard-menu nav nav-list collapse in">
+            <li><a href="index.html"><span class="fa fa-caret-right"></span>菜单管理</a></li>
+    </ul></li>
     </div>
 
     <div class="content">
@@ -141,10 +120,38 @@
         	</ul>
         </div>
         
+<!-- ************************************************************************************** -->      
         <div class="main-content">
-        
+	        <div class="btn-toolbar list-toolbar">
+			    <button class="btn btn-primary"><i class="fa fa-plus"></i>增加资源</button>
+			</div>
+			
+			<table class="table">
+				  <thead>
+				    <tr>
+				      <th>#</th>
+				      <th>资源名</th>
+				      <th>url</th>
+				      <th>是否显示</th>
+				      <th>描述</th>
+				      <th style="width: 3.5em;"></th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td>1</td>
+				      <td>Mark</td>
+				      <td>Tompson</td>
+				      <td>the_mark7</td>
+				      <td>
+				          <a href="user.html"><i class="fa fa-pencil"></i></a>
+				          <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-trash-o"></i></a>
+				      </td>
+				    </tr>
+				  </tbody>
+				</table>
 		</div>
-
+<!-- ************************************************************************************** -->
 
             <footer>
                 <hr>

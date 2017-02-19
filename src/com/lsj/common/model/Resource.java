@@ -3,6 +3,7 @@ package com.lsj.common.model;
 public class Resource {
 	
 	private Integer sid;
+	private Integer parentId;
 	private String name;
 	private String url;
 	private Integer cksPower;
@@ -52,6 +53,11 @@ public class Resource {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
 
 }
