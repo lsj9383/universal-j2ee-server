@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lsj.common.intercetpro.Authority;
+import com.lsj.common.intercetpro.AuthorityType;
 import com.lsj.user.model.User;
 import com.lsj.user.service.LoginService;
 
@@ -17,6 +19,7 @@ public class LoginController {
 	@Resource(name="loginService")
 	private LoginService service;
 	
+	@Authority(AuthorityType.NoValidata)
 	@RequestMapping("login.do")
 	public String login(HttpServletRequest request, HttpServletResponse response, String username, String password, boolean remember){
 		User user = service.validateUser(username, password);
@@ -28,12 +31,18 @@ public class LoginController {
 				session.setAttribute("user", user);
 			}
 			System.out.println(username+password+remember);
-			return "redirect: home";
+			return "redirect: home.do";
 		}
 	}
 	
+	@Authority(AuthorityType.NoValidata)
 	@RequestMapping("loginview.do")
 	public String login(){
 		return "login";
+	}
+	
+	@RequestMapping("homeview.do")
+	public String home(){
+		return "home";
 	}
 }
