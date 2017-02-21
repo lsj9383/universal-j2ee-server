@@ -1,94 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+    pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-	<meta name="renderer" content="webkit|ie-comp|ie-stand">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta http-equiv="Cache-Control" content="no-siteapp" />
-	<meta name="keywords" content="scclui框架">
-	<meta name="description" content="scclui为轻量级的网站后台管理系统模版。">
-    <title>登录</title>
-	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/common/layui/css/layui.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/common/css/sccl.css">
-</head>
-<body class="login-bg">
-    <div class="login-box">
-        <header>
-            <h1>框架后台管理系统</h1>
-        </header>
-        <div class="login-main">
-			<form action="login.do" class="layui-form" method="post">
-				<input name="__RequestVerificationToken" type="hidden" value="">                
-				<div class="layui-form-item">
-					<label class="login-icon">
-						<i class="layui-icon"></i>
-					</label>
-					<input type="text" name="username" lay-verify="userName" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
-				</div>
-				<div class="layui-form-item">
-					<label class="login-icon">
-						<i class="layui-icon"></i>
-					</label>
-					<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">
-				</div>
-				<div class="layui-form-item">
-					<div class="pull-left login-remember">
-						<label>记住帐号？</label>
+	<meta charset="utf-8">
+    <title>Bootstrap Admin</title>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-						<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" title="记住帐号"><div class="layui-unselect layui-form-switch"><i></i></div>
-					</div>
-					<div class="pull-right">
-						<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
-							<i class="layui-icon"></i> 登录
-						</button>
-					</div>
-					<div class="clear"></div>
-				</div>
-			</form>        
-		</div>
-        <footer>
-            <p>xuan © www.mycodes.net</p>
-        </footer>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="${serverRoot}/static/lib/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="${serverRoot}/static/lib/font-awesome/css/font-awesome.css">
+    <script src="${serverRoot}/static/lib/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="${serverRoot}/static/stylesheets/theme.css">
+    <link rel="stylesheet" type="text/css" href="${serverRoot}/static/stylesheets/premium.css">
+<title>Insert title here</title>
+</head>
+<body class=" theme-blue">
+    <!-- Demo page code -->
+
+    <script type="text/javascript">
+        $(function() {
+            var match = document.cookie.match(new RegExp('color=([^;]+)'));
+            if(match) var color = match[1];
+            if(color) {
+                $('body').removeClass(function (index, css) {
+                    return (css.match (/\btheme-\S+/g) || []).join(' ')
+                })
+                $('body').addClass('theme-' + color);
+            }
+
+            $('[data-popover="true"]').popover({html: true});
+            
+        });
+    </script>
+    <style type="text/css">
+        #line-chart {
+            height:300px;
+            width:800px;
+            margin: 0px auto;
+            margin-top: 1em;
+        }
+        .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover { 
+            color: #fff;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function() {
+            var uls = $('.sidebar-nav > ul > *').clone();
+            uls.addClass('visible-xs');
+            $('#main-menu').append(uls.clone());
+        });
+    </script>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  
+
+  <!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+  <!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+  <!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+  <!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> 
+   
+  <!--<![endif]-->
+
+    <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <a class="" href="index.html"><span class="navbar-brand"><span class="fa fa-paper-plane"></span> Aircraft</span></a></div>
+
+        <div class="navbar-collapse collapse" style="height: 1px;">
+
+        </div>
+      </div>
     </div>
     
-    
-    <script type="text/html" id="code-temp">
-        <div class="login-code-box">
-            <input type="text" class="layui-input" id="code" />
-            <img id="valiCode" src="/manage/validatecode?v=636150612041789540" alt="验证码" />
+
+
+        <div class="dialog">
+    <div class="panel panel-default">
+        <p class="panel-heading no-collapse">Sign In</p>
+        <div class="panel-body">
+            <form action="login.do" method="POST">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control span12" name="username">
+                </div>
+                <div class="form-group">
+                <label>Password</label>
+                    <input type="password" class="form-controlspan12 form-control" name="password">
+                </div>
+                <input type="submit" class="btn btn-primary pull-right" value="Sign In">
+                <label class="remember-me"><input type="checkbox"> Remember me</label>
+                <div class="clearfix"></div>
+            </form>
         </div>
-    </script>
-    <script src="${pageContext.request.contextPath}/static/common/layui/layui.js"></script>
-    <script>
-        layui.use(['layer', 'form'], function () {
-            var layer = layui.layer,
-				$ = layui.jquery,
-				form = layui.form();
+    </div>
+    <p class="pull-right" style=""><a href="http://www.portnine.com" target="blank" style="font-size: .75em; margin-top: .25em;">Design by Portnine</a></p>
+    <p><a href="reset-password.html">Forgot your password?</a></p>
+</div>
 
-            form.verify({
-                userName: function (value) {
-                    if (value === '')
-                        return '请输入用户名';
-                },
-                password: function (value) {
-                    if (value === '')
-                        return '请输入密码';
-                }
-            });
 
-            var errorCount = 0;
 
-            form.on('submit(login)', function (data) {
-				window.location.href = "..common/page/index.html";
-            });
-
+    <script src="${serverRoot}/static/lib/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript">
+        $("[rel=tooltip]").tooltip();
+        $(function() {
+            $('.demo-cancel-click').click(function(){return false;});
         });
-		
     </script>
-  </body>
-</html>
+    
+  
+</body></html>

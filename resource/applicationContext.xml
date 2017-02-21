@@ -9,7 +9,24 @@
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
 	<import resource="database.xml"/>
+	<!-- jdbcTemplate -->
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		 <property name = "dataSource" ref="dataSource" />
+		 <property name = "dataSource" ref="dataSourceDruid" />
 	</bean>
+	
+	<!-- druid监控spring jdbc -->
+	<bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+	    scope="prototype">
+	    <property name="patterns">
+	        <list>
+	            <value>com.lsj.*.service.*</value>
+	        </list>
+	    </property>
+	</bean>
+	
+	<aop:config>
+	    <aop:advisor advice-ref="druid-stat-interceptor"
+	        pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
 </beans>

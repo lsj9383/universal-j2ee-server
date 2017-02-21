@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.lsj.common.intercetpro.Authority;
-import com.lsj.common.intercetpro.AuthorityType;
+import com.lsj.common.interceptor.Authority;
+import com.lsj.common.interceptor.AuthorityType;
 import com.lsj.user.model.User;
 import com.lsj.user.service.LoginService;
 
@@ -19,30 +20,29 @@ public class LoginController {
 	@Resource(name="loginService")
 	private LoginService service;
 	
-	@Authority(AuthorityType.NoValidata)
+	@Authority(type=AuthorityType.NoValidata)
 	@RequestMapping("login.do")
+	//remeber user暂且未实现
 	public String login(HttpServletRequest request, HttpServletResponse response, String username, String password, boolean remember){
 		User user = service.validateUser(username, password);
 		if(user == null){
 			return "redirect: loginview.do";
 		}else{
 			HttpSession session = request.getSession(true);
-			if(remember){
-				session.setAttribute("user", user);
-			}
+			session.setAttribute("user", user);
 			System.out.println(username+password+remember);
-			return "redirect: home.do";
+			return "redirect: indexview.do";
 		}
 	}
 	
-	@Authority(AuthorityType.NoValidata)
+	@Authority(type=AuthorityType.NoValidata)
 	@RequestMapping("loginview.do")
-	public String login(){
+	public String login(HttpServletRequest request, Model model){
 		return "login";
 	}
 	
-	@RequestMapping("homeview.do")
-	public String home(){
-		return "home";
+	@RequestMapping("indexview.do")
+	public String index(){
+		return "index";
 	}
 }

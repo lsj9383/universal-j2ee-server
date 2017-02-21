@@ -8,12 +8,48 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
+	<bean id="dataSourceDruid" class="com.alibaba.druid.pool.DruidDataSource">
+		<!-- 数据源的基本属性 -->
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://139.199.209.106:3306/cms"></property>
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		
+		<!-- 配置初始化大小、最小、最大的数据库连接池 -->
+		<property name="initialSize" value="1" />
+		<property name="minIdle" value="1" /> 
+		<property name="maxActive" value="20" />
+		
+		<!-- 配置获取连接等待超时的时间 -->
+      <property name="maxWait" value="60000" />
+      
+      <!-- 配置间隔关闭空闲连接的检查周期，单位是毫秒 -->
+      <property name="timeBetweenEvictionRunsMillis" value="60000" />
+      
+      <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+      <property name="minEvictableIdleTimeMillis" value="300000" />
+      
+      <property name="validationQuery" value="SELECT 'x'" />
+      <property name="testWhileIdle" value="true" />
+      <property name="testOnBorrow" value="false" />
+      <property name="testOnReturn" value="false" />
+      
+      <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+      <property name="poolPreparedStatements" value="true" />
+      <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+      
+       <!-- 配置监控统计拦截的filters -->
+      <!--  --><property name="filters" value="stat" /> 
+	</bean>
+
+<!-- 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/cms" />
+		<property name="url" value="jdbc:mysql://139.199.209.106:3306/cms" />
 		<property name="username" value="root" />
 		<property name="password" value="root" />
 		<property name="initialSize" value="5" />
 	</bean>
-
+ -->
+ 
 </beans>
