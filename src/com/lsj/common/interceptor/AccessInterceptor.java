@@ -2,6 +2,7 @@ package com.lsj.common.interceptor;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.lsj.common.StaticResource;
+import com.lsj.common.model.User;
 
 
 public class AccessInterceptor extends HandlerInterceptorAdapter{
@@ -42,11 +46,17 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 	
 	private Type superValidate(HttpServletRequest request, String url){
 		HttpSession session = request.getSession();
+		Map<String, Object> urlResource = StaticResource.urls.get(url);
+		User user = (User)session.getAttribute("user");
 		System.out.println(url);
-		if(session.getAttribute("user") == null){		//session中没有用户，则用户还没有登录，需要登录.
-			return Type.ERROR;
+		if(user == null){				//session中没有用户，则用户还没有登录，需要登录.
+			return Type.NOLOGGED;
 		}else{
-			return Type.SUCCESS;
+			if(user.getPower().charAt((Integer)urlResource.get("cks_power")) == 0){
+				return Type.NOPOWER;	//
+			}else{
+				return Type.SUCCESS;	//
+			}
 		}
 	}
 	
@@ -54,7 +64,15 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 		String url = "sys/turn.do";
 		switch(type){
 		case ERROR:
+			System.out.println("未知错误");
 			response.sendRedirect(url);
+			break;
+		case NOLOGGED:
+			System.out.println("未登录");
+			response.sendRedirect(url);
+			break;
+		case NOPOWER:
+			System.out.println("无权限");
 			break;
 		default :
 			break;
@@ -62,6 +80,6 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 	}
 	
 	public enum Type{
-		ERROR, SUCCESS
+		ERROR, NOLOGGED, NOPOWER, SUCCESS
 	}
 }
