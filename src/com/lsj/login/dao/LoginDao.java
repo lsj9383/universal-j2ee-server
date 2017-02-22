@@ -1,11 +1,12 @@
-package com.lsj.user.dao;
+package com.lsj.login.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import com.lsj.user.model.*;
+
+import com.lsj.common.model.User;
 
 @Repository
 public class LoginDao {

@@ -1,15 +1,15 @@
-package com.lsj.user.model;
+package com.lsj.common.model;
 
 public class User {
 	
-	private int sid;
+	private Integer sid;
 	private String username;
 	private String password;
 	private String power;
-	public int getSid() {
+	public Integer getSid() {
 		return sid;
 	}
-	public void setSid(int sid) {
+	public void setSid(Integer sid) {
 		this.sid = sid;
 	}
 	public String getUsername() {

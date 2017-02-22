@@ -1,4 +1,4 @@
-package com.lsj.user.controller;
+package com.lsj.login.controller;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lsj.common.interceptor.Authority;
 import com.lsj.common.interceptor.AuthorityType;
-import com.lsj.user.model.User;
-import com.lsj.user.service.LoginService;
+import com.lsj.common.model.User;
+import com.lsj.login.service.LoginService;
 
 @Controller
 public class LoginController {

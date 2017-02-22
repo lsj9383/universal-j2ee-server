@@ -1,12 +1,12 @@
-package com.lsj.user.serviceImpl;
+package com.lsj.login.serviceImpl;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lsj.user.dao.LoginDao;
-import com.lsj.user.model.User;
-import com.lsj.user.service.LoginService;
+import com.lsj.common.model.User;
+import com.lsj.login.dao.LoginDao;
+import com.lsj.login.service.LoginService;
 
 @Service("loginService")
 public class LoginServiceImpl implements LoginService{

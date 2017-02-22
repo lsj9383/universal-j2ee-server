@@ -1,6 +1,6 @@
-package com.lsj.user.service;
+package com.lsj.login.service;
 
-import com.lsj.user.model.User;
+import com.lsj.common.model.User;
 
 public interface LoginService {
 	User validateUser(String username, String password);
