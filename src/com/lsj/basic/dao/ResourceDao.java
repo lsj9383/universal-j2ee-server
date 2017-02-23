@@ -26,7 +26,7 @@ public class ResourceDao {
 	
 	public Resource[] addResources(Resource[] ress){
 		for(Resource res : ress){
-			String sql = "insert into resources (name, url, cks_power, display_status, enable_status, remarks) values (:name, :url, :cksPower, :dispalyStatus, :enableStatus, :remarks)";
+			String sql = "insert into resources (parent_id, name, url, cks_power, display_status, enable_status, remarks) values (:parentId, :name, :url, :cksPower, :dispalyStatus, :enableStatus, :remarks)";
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			SqlParameterSource params = new BeanPropertySqlParameterSource(res);
 			njt.update(sql, params, keyHolder);
