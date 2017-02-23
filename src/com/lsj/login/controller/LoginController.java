@@ -1,5 +1,7 @@
 package com.lsj.login.controller;
 
+import java.io.IOException;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,26 +25,28 @@ public class LoginController {
 	@Authority(type=AuthorityType.NoValidata)
 	@RequestMapping("login.do")
 	//remeber user暂且未实现
-	public String login(HttpServletRequest request, HttpServletResponse response, String username, String password, boolean remember){
+	public String login(HttpServletRequest request, HttpServletResponse response, String username, String password, boolean remember) throws IOException{
 		User user = service.validateUser(username, password);
 		if(user == null){
-			return "redirect: loginview.do";
+			response.sendRedirect("loginview.do");
+			return null;
 		}else{
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", user);
 			System.out.println(username+password+remember);
-			return "redirect: indexview.do";
+			response.sendRedirect("indexview.do");
+			return null;
 		}
 	}
 	
 	@Authority(type=AuthorityType.NoValidata)
 	@RequestMapping("loginview.do")
 	public String login(HttpServletRequest request, Model model){
-		return "login";
+		return "loginview";
 	}
 	
 	@RequestMapping("indexview.do")
 	public String index(){
-		return "index";
+		return "indexview";
 	}
 }

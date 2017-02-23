@@ -19,6 +19,7 @@ public class StartAppListener implements ApplicationListener<ContextRefreshedEve
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
+		loadResource();
 		if(event.getApplicationContext().getParent() == null){
 			loadResource();
 		}else{

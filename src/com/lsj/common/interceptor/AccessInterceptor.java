@@ -48,8 +48,9 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		Map<String, Object> urlResource = StaticResource.urls.get(url);
 		User user = (User)session.getAttribute("user");
-		System.out.println(url);
-		if(user == null){				//session中没有用户，则用户还没有登录，需要登录.
+		if(urlResource == null){
+			return Type.ERROR;
+		}else if(user == null){				//session中没有用户，则用户还没有登录，需要登录.
 			return Type.NOLOGGED;
 		}else{
 			if(user.getPower().charAt((Integer)urlResource.get("cks_power")) == 0){
