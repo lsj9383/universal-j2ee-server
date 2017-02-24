@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false" %>
+<%@ page import="com.lsj.login.model.ResourceNode" %>
+<%@ page import="com.lsj.common.model.Resource" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html><head>
@@ -104,11 +106,30 @@
     
 
     <div class="sidebar-nav">
-    <ul>
-    <li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i> Dashboard<i class="fa fa-collapse"></i></a></li>
-    <li><ul class="dashboard-menu nav nav-list collapse in">
-            <li><a href="index.html"><span class="fa fa-caret-right"></span>菜单管理</a></li>
-    </ul></li>
+	    <ul>
+	    	<%
+	    		ResourceNode rootResource = (ResourceNode)request.getAttribute("resource");
+	    		for(ResourceNode topNode : rootResource.children){
+	    			String resourceName = topNode.resource.getName();
+	    	 %>
+		    	<li><a href="#" data-target=".dashboard-menu" class="nav-header" data-toggle="collapse"><i class="fa fa-fw fa-dashboard"></i><%= resourceName %><i class="fa fa-collapse"></i></a></li>
+			    <li>
+			    	<%
+			    		for(ResourceNode secNode : topNode.children){
+			    			String secResName = secNode.resource.getName();
+			    			String url = secNode.resource.getUrl();
+			    	 %>
+				    	<ul class="dashboard-menu nav nav-list collapse in">
+				            <li><a href="<%= url %>"><span class="fa fa-caret-right"></span><%= secResName %></a></li>
+				    	</ul>
+			    	<%
+			    		}
+			    	 %>
+				</li>
+			<%
+				}
+			 %>
+		</ul>
     </div>
 
     <div class="content">

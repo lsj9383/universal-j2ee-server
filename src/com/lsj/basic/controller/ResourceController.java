@@ -23,7 +23,7 @@ public class ResourceController {
 	 */
 	@ResponseBody
 	@Authority(type=AuthorityType.NoValidata)
-	@RequestMapping("restBasicRes.do")
+	@RequestMapping("restBasic.do")
 	public JsonForReturn restFoundResource(){
 		JsonForReturn json = new JsonForReturn();
 		json.data = resourceService.restFoundResource();

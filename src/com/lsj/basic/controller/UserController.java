@@ -11,6 +11,7 @@ import com.lsj.common.interceptor.AuthorityType;
 import com.lsj.system.JsonForReturn;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
