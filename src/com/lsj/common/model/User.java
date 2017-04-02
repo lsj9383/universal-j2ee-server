@@ -1,7 +1,5 @@
 package com.lsj.common.model;
 
-import java.util.Date;
-
 public class User {
 	
 	private Integer sid;

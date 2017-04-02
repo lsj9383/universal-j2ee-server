@@ -28,6 +28,18 @@
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Xss防御过滤器 -->
+	<filter>
+		<filter-name>xssFilter</filter-name>
+		<filter-class>com.lsj.common.filter.XssFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>xssFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	
 	<!-- druid过滤器进行监控,主要用于监控url -->
 	<filter>
 		<filter-name>DruidWebStatFilter</filter-name>

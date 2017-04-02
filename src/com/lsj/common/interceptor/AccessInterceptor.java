@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import redis.clients.jedis.Jedis;
+
 import com.lsj.common.StaticResource;
 import com.lsj.common.model.User;
 
@@ -23,7 +25,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 			request.getServletContext().setAttribute("serverRoot", request.getServletContext().getContextPath());
 			HandlerMethod hm = (HandlerMethod) handler;
 			Method execMethod = hm.getMethod();			//待运行的方法
-			
+			logAccess(request.getRequestURI());
 			Authority authority = execMethod.getAnnotation(Authority.class);
 			if(authority == null || authority.type() == AuthorityType.Validate){	//注解为空或为Validate就需要认证
 				Type type = superValidate(request, request.getServletPath());
@@ -81,12 +83,23 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 			redUrl = url+target+"/jser/indexview.do"+msg+"no power";
 			response.sendRedirect(redUrl);
 			break;
+		case LIMIT:
+			System.out.println("限制访问");
+			redUrl = url+target+"/jser/indexview.do"+msg+"limit IP";
+			response.sendRedirect(redUrl);
+			break;
 		default :
 			break;
 		}
 	}
 	
+	private void logAccess(String uri){
+		Jedis jedis = StaticResource.jedisPool.getResource();
+		jedis.incr("url:"+uri+":count");
+		jedis.close();   //返回给连接池
+	}
+	
 	public enum Type{
-		ERROR, NOLOGGED, NOPOWER, SUCCESS
+		ERROR, NOLOGGED, NOPOWER, LIMIT, SUCCESS
 	}
 }

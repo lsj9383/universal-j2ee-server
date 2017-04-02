@@ -20,11 +20,6 @@ public class StartAppListener implements ApplicationListener<ContextRefreshedEve
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		loadResource();
-		if(event.getApplicationContext().getParent() == null){
-			loadResource();
-		}else{
-			System.out.println(event.getApplicationContext().getParent());
-		}
 	}
 	
 	private void loadResource(){
@@ -33,6 +28,4 @@ public class StartAppListener implements ApplicationListener<ContextRefreshedEve
 			StaticResource.urls.put((String)res.get("url"), res);
 		}
 	}
-
-
 }
