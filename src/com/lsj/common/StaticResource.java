@@ -3,10 +3,14 @@ package com.lsj.common;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.lsj.system.FileLoader;
+
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 public class StaticResource {
+	public static String appRealPath;
+	public static String context;
 	/**
 	 * Url相关信息
 	 */
@@ -18,6 +22,7 @@ public class StaticResource {
 	public static final JedisPool jedisPool;
 	public static final String redishost = "127.0.0.1";
 	public static final int redisport = 6379;
+	public static FileLoader luaScript;
 	
 	static{
 		JedisPoolConfig poolConfig = new JedisPoolConfig();

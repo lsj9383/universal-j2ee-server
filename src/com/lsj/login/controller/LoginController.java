@@ -37,7 +37,6 @@ public class LoginController {
 		}else{
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", user);
-			System.out.println(username+password+remember);
 			response.sendRedirect("indexview.do");
 			return null;
 		}

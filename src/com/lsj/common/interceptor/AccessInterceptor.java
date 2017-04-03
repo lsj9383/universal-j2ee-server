@@ -2,6 +2,7 @@ package com.lsj.common.interceptor;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,10 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 		HttpSession session = request.getSession();
 		Map<String, Object> urlResource = StaticResource.urls.get(url);
 		User user = (User)session.getAttribute("user");
-		if(urlResource == null){
+		
+		if(limitIP(request.getRemoteAddr())){
+			return Type.LIMIT;
+		}else if(urlResource == null){
 			return Type.ERROR;
 		}else if(user == null){				//session中没有用户，则用户还没有登录，需要登录.
 			return Type.NOLOGGED;
@@ -97,6 +101,13 @@ public class AccessInterceptor extends HandlerInterceptorAdapter{
 		Jedis jedis = StaticResource.jedisPool.getResource();
 		jedis.incr("url:"+uri+":count");
 		jedis.close();   //返回给连接池
+	}
+	
+	private boolean limitIP(String ip){
+		Jedis jedis = StaticResource.jedisPool.getResource();
+		Object res = jedis.eval(StaticResource.luaScript.get("coarse-limitIP.lua"), Arrays.asList(ip), Arrays.asList("30", "100"));	//100秒运行访问30次
+		jedis.close();
+		return ((Long)res) == 1;
 	}
 	
 	public enum Type{
